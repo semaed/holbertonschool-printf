@@ -9,9 +9,11 @@
  */
 int _putchar(char c)
 {
-	if (c == '\0')
-	{
-		return (-1);
-	}
+    if (c == '\0')
+    {
+        return (-1); // Return -1 for a null character, indicating an error
+    }
+
+    // Write the character 'c' to the standard output (stdout)
     return (write(1, (unsigned char*)&c, 1));
 }
