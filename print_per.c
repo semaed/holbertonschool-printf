@@ -1,11 +1,13 @@
 #include "main.h"
 /**
- * print_per- prints % symbol
- * Return:always 1
+ * print_per - prints the '%' symbol
+ * Return: Always returns 1
  */
 int print_per(void)
 {
-	_putchar('%');
-	return 1;
-}
+    // Call the _putchar function to print the '%' symbol
+    _putchar('%');
 
+    // Return 1 to indicate that one character has been printed
+    return 1;
+}
