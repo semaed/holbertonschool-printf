@@ -11,13 +11,17 @@ int call_functions(const char* format, va_list args)
     int i, pc;
     pc = 0;
 
+    // Check if the format string is NULL or empty
     if (format == NULL || format[0] == '\0')
         return -1;
 
+    // Loop through the format string
     for (i = 0; format[i] != '\0'; i++)
     {
+        // Check for characters other than '%'
         if (format[i] != '%')
         {
+            // Handle special case for null character
             if (format[i] == '\0')
             {
                 putchar('\0');
@@ -28,45 +32,46 @@ int call_functions(const char* format, va_list args)
                 _putchar(format[i]);
                 pc++;
             }
-            continue;
+            continue; // Continue to the next character in the format string
         }
 
-        i++;
+        i++; // Move to the character after '%'
+
         if (format[i] == '\0')
-            return -1;
+            return -1; // Invalid format string with '%' at the end
 
         switch (format[i]) {
             case 'c':{
                 char c = va_arg(args, int);
-                _putchar(c);
-                pc ++;
+                _putchar(c); // Print a character
+                pc++;
                 break;
             }
             case 's':{
                 char *str = va_arg(args, char*);
                 if (str == NULL)
                     str = "(null)";
-                pc += print_string(str);
+                pc += print_string(str); // Print a string
                 break;
             }
             case '%':{
-                _putchar('%');
+                _putchar('%'); // Print a '%' character
                 pc++;
                 break;
             }
             case 'd':
             case 'i':{
                 int n = va_arg(args, int);
-                pc += print_int(n);
+                pc += print_int(n); // Print an integer
                 break;
             }
             default:
-                _putchar('%');
-                _putchar(format[i]);
-                pc += 2;
+                _putchar('%'); // Print '%' when an unknown format specifier is encountered
+                _putchar(format[i]); // Print the unknown format specifier
+                pc += 2; // Increment the character count by 2
                 break;
         }
     }
 
-    return pc;
+    return pc; // Return the total number of characters printed
 }
